@@ -1,0 +1,59 @@
+@extends('layout')
+
+@section('pagina_titulo', 'Login')
+@section('pagina_conteudo')
+
+
+<div class="container">
+    <h2>Cadastro</h2>
+    <div class="row">
+        <form class="col s12" name="formRegister">
+            @csrf
+            <div class="input-field col s12">
+                <i class="material-icons prefix">person</i>
+                <input placeholder="Insira seu nome" id="name" type="text" name="name" class="validate">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input placeholder="Insira seu email" id="email" type="email" name="email" class="validate">
+                <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">https</i>
+                <input placeholder="Insira a sua senha" id="password" type="password" name="password" class="validate">
+                <label for="password">Senha</label>
+            </div>
+
+            <button class="btn waves-effect waves-light" type="submit" name="action">Registrar
+                <i class="material-icons right">sd_storage</i>
+            </button>
+        </form>
+    </div>
+</div>
+<script src="{{asset('site/assets/js/jquery.js')}}"></script>
+<script src="{{asset('site/assets/js/materialize.js')}}"></script>
+
+<script>
+    $(function() {
+        $('form[name="formRegister"]').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: "{{route('register.storage')}}",
+                type: "post",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(retorno) {
+                    if (retorno.status) {
+                        var mensagem = retorno.message;
+                        M.toast({html: `<span style="color: #66bb6a"> ${mensagem}`}, 10000, '');
+                    } else {
+                        var mensagem = retorno.message;
+                        M.toast({html: `<span style="color: #e53935"> ${mensagem}`}, 10000, '');
+                    }
+                }
+            });
+        });
+    });
+</script>
+@stop
