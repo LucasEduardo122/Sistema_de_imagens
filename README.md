@@ -1,6 +1,6 @@
 ## 🛠 Techs
 
-Cinelandia foi construído com as seguintes techs:
+Sistema de imagens foi construído com as seguintes techs:
 
 - [PHP](https://www.php.net/)
 - [PHP MyAdmin](https://www.phpmyadmin.net/)
